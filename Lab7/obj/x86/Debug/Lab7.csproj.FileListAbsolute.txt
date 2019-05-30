@@ -1,0 +1,6 @@
+/Users/sorokindmitrij/Projects/YesICan/Lab7/bin/Debug/Lab7.exe
+/Users/sorokindmitrij/Projects/YesICan/Lab7/bin/Debug/Lab7.pdb
+/Users/sorokindmitrij/Projects/YesICan/Lab7/obj/x86/Debug/Lab7.csprojAssemblyReference.cache
+/Users/sorokindmitrij/Projects/YesICan/Lab7/obj/x86/Debug/Lab7.csproj.CoreCompileInputs.cache
+/Users/sorokindmitrij/Projects/YesICan/Lab7/obj/x86/Debug/Lab7.exe
+/Users/sorokindmitrij/Projects/YesICan/Lab7/obj/x86/Debug/Lab7.pdb

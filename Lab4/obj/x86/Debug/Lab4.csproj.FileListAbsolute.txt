@@ -1,0 +1,5 @@
+/Users/sorokindmitrij/Projects/YesICan/Lab4/bin/Debug/Lab4.exe
+/Users/sorokindmitrij/Projects/YesICan/Lab4/bin/Debug/Lab4.pdb
+/Users/sorokindmitrij/Projects/YesICan/Lab4/obj/x86/Debug/Lab4.csproj.CoreCompileInputs.cache
+/Users/sorokindmitrij/Projects/YesICan/Lab4/obj/x86/Debug/Lab4.exe
+/Users/sorokindmitrij/Projects/YesICan/Lab4/obj/x86/Debug/Lab4.pdb
