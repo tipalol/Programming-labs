@@ -12,9 +12,8 @@ namespace Lab9
     class MainClass
     {
         #region Модель
-        static Time exampleTime = new Time(6, 20, 0);
-        static Time anotherTime = new Time(16, 45, 55);
-        static Time currentTime = new Time(DateTime.Now);
+        static Time[] timeList = new Time[3];
+        static TimeArray timeArray;
         #endregion
         #region Представление
         /// <summary>
@@ -53,9 +52,9 @@ namespace Lab9
 
             Console.WriteLine();
 
-            Console.WriteLine($"Пример времени: {exampleTime}");
-            Console.WriteLine($"Другое время: {anotherTime}");
-            Console.WriteLine($"Время прямо сейчас: {currentTime}");
+            Console.WriteLine($"Пример времени: {timeList[0]}");
+            Console.WriteLine($"Другое время: {timeList[1]}");
+            Console.WriteLine($"Время прямо сейчас: {timeList[2]}");
 
             result = GetInt("необходимый пункт меню");
 
@@ -69,117 +68,114 @@ namespace Lab9
         }
         #endregion
         #region Контроллер
-
+        /// <summary>
+        /// Вычисляет среднее арифмитическое по минутам
+        /// </summary>
+        /// <returns>Среднее арифмитическое по минутам</returns>
+        /// <param name="array">Массив</param>
+        static double CalculateAverage(TimeArray array)
+        {
+            int sum = 0;
+            for (int i = 0; i < array.Size; i++)
+            {
+                sum += array[i].Minutes;
+            }
+            return sum / array.Size;
+        }
         #endregion
         public static void Main(string[] args)
         {
+            timeList[0] = new Time(6, 20, 0);
+            timeList[1] = new Time(16, 45, 55);
+            timeList[2] = new Time(DateTime.Now);
+            timeArray = new TimeArray(timeList);
             int input = Menu();
             while (input != 0)
             {
                 switch (input)
                 {
                     case 1:
-                        int currentTime_ = GetInt("время, с которым нужно работать (1, 2 или 3)");
-                        switch (currentTime_)
+                        int currentTime_ = GetInt("время, с которым нужно работать (1, 2 или 3)")+1;
+                        if (currentTime_ > 0 && currentTime_ < 4)
                         {
-                            case 1:
-                                exampleTime.AddSeconds(GetInt("кол-во добавляемых секунд"));
-                                break;
-                            case 2:
-                                anotherTime.AddSeconds(GetInt("кол-во добавляемых секунд"));
-                                break;
-                            case 3:
-                                currentTime.AddSeconds(GetInt("кол-во добавляемых секунд"));
-                                break;
-                            default:
-                                Console.WriteLine("Такого варианта не было, выберите варианты от 1 до 3");
-                                break;
-                        }
-                        Console.WriteLine("Время успешно добавлено");
+                            timeList[currentTime_-1].AddSeconds(GetInt("кол-во добавляемых секунд"));
+                            Console.WriteLine("Время успешно добавлено");
+                        } else
+                            Console.WriteLine("Такого времени нет. Возможные варианты были: 1, 2 или 3");
                         Console.ReadKey();
                         break;
                     case 2:
                         int currentTimeToAddOneMinute = GetInt("время, с которым нужно работать (1, 2 или 3)");
-                        switch (currentTimeToAddOneMinute)
+                        if (currentTimeToAddOneMinute > 0 && currentTimeToAddOneMinute < 4)
                         {
-                            case 1:
-                                exampleTime++;
-                                break;
-                            case 2:
-                                anotherTime++;
-                                break;
-                            case 3:
-                                currentTime++;
-                                break;
-                            default:
-                                Console.WriteLine("Такого варианта не было, выберите варианты от 1 до 3");
-                                break;
+                            timeList[currentTimeToAddOneMinute-1]++;
+                            Console.WriteLine("Минута успешно добавлена");
                         }
-                        Console.WriteLine("Время успешно увеличено на 1 минуту");
+                        else
+                            Console.WriteLine("Такого времени нет. Возможные варианты были: 1, 2 или 3");
                         Console.ReadKey();
                         break;
                     case 3:
                         int currentTimeToMinusOneMinute = GetInt("время, с которым нужно работать (1, 2 или 3)");
-                        switch (currentTimeToMinusOneMinute)
+                        if (currentTimeToMinusOneMinute > 0 && currentTimeToMinusOneMinute < 4)
                         {
-                            case 1:
-                                exampleTime--;
-                                break;
-                            case 2:
-                                anotherTime--;
-                                break;
-                            case 3:
-                                currentTime--;
-                                break;
-                            default:
-                                Console.WriteLine("Такого варианта не было, выберите варианты от 1 до 3");
-                                break;
+                            timeList[currentTimeToMinusOneMinute-1]--;
+                            Console.WriteLine("Минута успешно убавлена");
                         }
-                        Console.WriteLine("Время успешно уменьшено на 1 минуту");
+                        else
+                            Console.WriteLine("Такого времени нет. Возможные варианты были: 1, 2 или 3");
                         Console.ReadKey();
                         break;
                     case 4:
                         int currentTimeToInt = GetInt("время, с которым нужно работать (1, 2 или 3)");
-                        switch (currentTimeToInt)
+                        if (currentTimeToInt > 0 && currentTimeToInt < 4)
                         {
-                            case 1:
-                                Console.WriteLine($"Явное приведение к int: {(int) exampleTime}");
-                                break;
-                            case 2:
-                                Console.WriteLine($"Явное приведение к int: {(int)anotherTime}");
-                                break;
-                            case 3:
-                                Console.WriteLine($"Явное приведение к int: {(int)currentTime}");
-                                break;
-                            default:
-                                Console.WriteLine("Такого варианта не было, выберите варианты от 1 до 3");
-                                break;
+                            Console.WriteLine($"Приведенное к int время{(int) timeList[currentTimeToInt-1]}");
                         }
+                        else
+                            Console.WriteLine("Такого времени нет. Возможные варианты были: 1, 2 или 3");
                         Console.ReadKey();
                         break;
                     case 5:
                         int currentTimeToBool = GetInt("время, с которым нужно работать (1, 2 или 3)");
-                        switch (currentTimeToBool)
+                        if (currentTimeToBool > 0 && currentTimeToBool < 4)
                         {
-                            case 1:
-                                Console.WriteLine($"Неявное приведение к bool: {false || exampleTime}");
-                                break;
-                            case 2:
-                                Console.WriteLine($"Неявное приведение к bool: {false || anotherTime}");
-                                break;
-                            case 3:
-                                Console.WriteLine($"Неявное приведение к bool: {false || currentTime}");
-                                break;
-                            default:
-                                Console.WriteLine("Такого варианта не было, выберите варианты от 1 до 3");
-                                break;
+                            Console.WriteLine($"Приведенное к bool время{false || timeList[currentTimeToBool-1]}");
                         }
+                        else
+                            Console.WriteLine("Такого времени нет. Возможные варианты были: 1, 2 или 3");
                         Console.ReadKey();
                         break;
                     case 6:
                         int firstTimeToPlus = GetInt("первое слагаемое");
-                        int secondTimeToPlus = GetInt("второе слагаемое");
-
+                        if (firstTimeToPlus > 0 && firstTimeToPlus < 4)
+                        {
+                            int secondTimeToPlus = GetInt("второе слагаемое");
+                            if (secondTimeToPlus > 0 && secondTimeToPlus < 4)
+                            {
+                                Console.WriteLine($"Результат сложения: {timeList[firstTimeToPlus-1] + timeList[secondTimeToPlus-1]}");
+                            } else
+                                Console.WriteLine("Такого времени нет. Возможные варианты были: 1, 2 или 3");
+                        } else Console.WriteLine("Такого времени нет. Возможные варианты были: 1, 2 или 3");
+                        Console.ReadKey();
+                        break;
+                    case 7:
+                        int firstTimeToMinus = GetInt("первое слагаемое");
+                        if (firstTimeToMinus > 0 && firstTimeToMinus < 4)
+                        {
+                            int secondTimeToPlus = GetInt("второе слагаемое");
+                            if (secondTimeToPlus > 0 && secondTimeToPlus < 4)
+                            {
+                                Console.WriteLine($"Результат вычитания: {timeList[firstTimeToMinus-1] - timeList[secondTimeToPlus-1]}");
+                            }
+                            else
+                                Console.WriteLine("Такого времени нет. Возможные варианты были: 1, 2 или 3");
+                        }
+                        else Console.WriteLine("Такого времени нет. Возможные варианты были: 1, 2 или 3");
+                        Console.ReadKey();
+                        break;
+                    case 8:
+                        Console.WriteLine($"Среднее арифмитическое минут: {CalculateAverage(timeArray)}");
                         break;
                 }
                 input = Menu();

@@ -127,6 +127,16 @@ namespace Lab9
             else
                 return false;
         }
+        public static Time operator +(Time left, Time right)
+        {
+            left.AddMinutes(right.Minutes);
+            return left;
+        }
+        public static Time operator -(Time left, Time right)
+        {
+            left.AddMinutes(-right.Minutes);
+            return left;
+        }
         #endregion
         #region Представление
         /// <summary>
