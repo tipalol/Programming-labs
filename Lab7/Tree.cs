@@ -1,4 +1,11 @@
-﻿using System;
+﻿//
+//  Tree.cs
+//  Tree
+//
+//  Created by Сорокин Дмитрий on 23/05/2019.
+//  Copyright © 2019 Сорокин Дмитрий. All rights reserved.
+//
+using System;
 namespace Lab7
 {
     /// <summary>

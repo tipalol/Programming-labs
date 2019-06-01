@@ -1,4 +1,11 @@
-﻿using System;
+﻿//
+//  DatabaseWorker.cs
+//  DatabaseWorker
+//
+//  Created by Сорокин Дмитрий on 01/06/2019.
+//  Copyright © 2019 Сорокин Дмитрий. All rights reserved.
+//
+using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
