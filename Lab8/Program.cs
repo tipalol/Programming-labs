@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Lab8
@@ -9,11 +10,11 @@ namespace Lab8
         /// <summary>
         /// Реализует работу с данными
         /// </summary>
-        static MeteoWorker meteoWorker;
+        static MeteoWorker meteoWorker = MeteoWorker.GetInstance();
         /// <summary>
-        /// реализует работу с файлами
+        /// Реализует работу с файлами
         /// </summary>
-        static DatabaseWorker databaseWorker;
+        static DatabaseWorker databaseWorker = DatabaseWorker.GetInstance();
         #endregion
         #region Представление
         /// <summary>
@@ -173,16 +174,98 @@ namespace Lab8
             }
             return result;
         }
+        /// <summary>
+        /// находит теплые дни
+        /// </summary>
+        /// <returns>Теплые дни</returns>
+        /// <param name="mw">Метео работник</param>
+        /// <param name="month">Месяц</param>
+        static Dictionary<MeteoWorker.Data, List<int>> FindWormDays(MeteoWorker mw, Months month)
+        {
+            var datas = mw.GetCurrentMonths(month);
+            Dictionary<MeteoWorker.Data, List<int>> result = new Dictionary<MeteoWorker.Data, List<int>>();
+            List<int> tempDays;
+
+            foreach (var data in datas)
+            {
+                tempDays = new List<int>();
+                for (int i = 0; i < data.dayTemperature.Length; i++)
+                    if (data.dayTemperature[i] > data.averageTemperature)
+                        tempDays.Add(i);
+                result.Add(data, tempDays);
+            }
+
+            return result;
+        }
+        static int FindLongestSpaceBetweenMinusDays(List<MeteoWorker.Data> datas)
+        {
+            //Окончательное максимальное расстояние
+            int result = 0;
+            //Временное максимальное расстояние
+            int tempMax = 0;
+            //Сохраненный знак числа
+            int sign = 0;
+
+            foreach (var data in datas)
+            {
+                foreach (var day in data.dayTemperature)
+                {
+                    //Если попали на неотрицательное число
+                    if ( Math.Sign(day) > -1 )
+                    {
+                        //Если знак предыдущего числа был отрицательным или 
+                        //если отрицательное уже было встречено до этого
+                        if (sign < 0 || tempMax > 0)
+                            tempMax++;
+
+                        //Изменяем сохраненный знак числа
+                        sign = Math.Sign(day);
+                    }
+                    //Если попали на отрицательное число
+                    else if ( Math.Sign(day) == -1 )
+                    {
+                        //Если превысили уже имеющееся масимальное расстояние
+                        if (tempMax > result)
+                            result = tempMax;
+                        //Обнуляем временное расстояние между отрицательными
+                        //начинаем подсчет заново
+                        tempMax = 0;
+                        //Изменяем временный знак числа
+                        sign = Math.Sign(day);
+                    }
+                }
+            }
+
+            return result;
+        }
         #endregion
         public static void Main(string[] args)
         {
+            //Измените на 0, если не хотите, чтобы изменения сохранялись
+            const int AUTO_SAVE = 1;
             int input = Menu();
             while (input != 0)
             {
                 switch (input)
                 {
                     case 1:
-
+                        Console.WriteLine("Введите путь к файлу, либо же его имя, если он находится в корневой папке");
+                        string path = Console.ReadLine();
+                        databaseWorker.SetPath(path);
+                        if (databaseWorker.IsThereDatabase())
+                        {
+                            meteoWorker = databaseWorker.GetData();
+                            Console.WriteLine("База данных успешно загружена");
+                        } else
+                        {
+                            Console.WriteLine("База данных по указанному пути не найдена");
+                            Console.WriteLine("Создать новую? (1 - да, 0 - нет");
+                            if (GetInt("выбранную опцию") == 1)
+                            {
+                                databaseWorker.SaveData(meteoWorker);
+                                Console.WriteLine("База данных успешно создана");
+                            }
+                        }
                         break;
                     case 2:
                         meteoWorker.PrintData();
@@ -214,7 +297,28 @@ namespace Lab8
                         Console.WriteLine("Данные успешно скорректированы");
                         Console.ReadKey();
                         break;
+                    case 6:
+                        Months month_ = ChooseMonth();
+
+                        var wormDays = FindWormDays(meteoWorker, month_);
+
+                        foreach (KeyValuePair<MeteoWorker.Data, List<int>> pair in wormDays)
+                        {
+                            Console.WriteLine("Новый год..");
+                            foreach (int day in pair.Value)
+                                Console.WriteLine($"Число теплого дня: {day}");
+                        }
+
+                        Console.ReadKey();
+                        break;
+                    case 7:
+                        int lsbmd = FindLongestSpaceBetweenMinusDays(meteoWorker.GetData);
+                        Console.WriteLine($"{lsbmd}");
+                        Console.ReadKey();
+                        break;
                 }
+                if (AUTO_SAVE == 1)
+                    databaseWorker.SaveData(meteoWorker);
                 input = Menu();
                 Console.Clear();
             }

@@ -38,7 +38,9 @@ namespace Lab8
         /// <summary>
         /// Создает объект <see cref="T:Lab8.MeteoWorker"/>.
         /// </summary>
-        private MeteoWorker() {}
+        private MeteoWorker() {
+            GetData = new List<Data>();
+        }
         /// <summary>
         /// Возвращает единственный объект класса
         /// </summary>
@@ -71,7 +73,7 @@ namespace Lab8
         {
             foreach (Data data in GetData) {
                 Console.WriteLine(data);
-                for (int i = 1; i <= data.dayTemperature.Length; i++)
+                for (int i = 1; i < data.dayTemperature.Length; i++)
                     Console.WriteLine($"Температура {i} дня равнялась {data.dayTemperature[i]}");
             }
         }
@@ -113,6 +115,19 @@ namespace Lab8
             foreach (int temperature in data.dayTemperature)
                 sum += temperature;
             return sum / data.dayTemperature.Length;
+        }
+        /// <summary>
+        /// Возвращает все имеющие в базе данные по данным месяцам
+        /// </summary>
+        /// <returns>Все имеющие в базе данные по данным месяцам</returns>
+        /// <param name="month">Месяц</param>
+        public List<Data> GetCurrentMonths(Months month)
+        {
+            List<Data> result = new List<Data>();
+            foreach (Data data in GetData)
+                if (data.month == month)
+                    result.Add(data);
+            return result;
         }
         #endregion
     }
