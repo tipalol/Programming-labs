@@ -150,6 +150,7 @@ namespace Lab7
                         break;
                 }
                 input = Menu();
+                Console.Clear();
             }
 
         }

@@ -149,15 +149,16 @@ namespace Lab7
         /// <param name="number">Позиция вставляемого элемента</param>
         public static DoublePoint AddPoint(DoublePoint begin, int number)
         {
-            var random = new Random();
-            var info = random.Next(0, 9).ToString();
+            //var random = new Random();
+            Console.WriteLine("Введите добавляемый элемент");
+            var info = Console.ReadLine();//random.Next(0, 9).ToString();
             DoublePoint newPoint = MakePoint(info);
 
             newPoint.PrintInfo();
             //Если список оказывается пустым
             if (begin == null)
             {
-                begin = MakePoint(random.Next(0, 9).ToString());
+                begin = MakePoint(info);//MakePoint(random.Next(0, 9).ToString());
                 return begin;
             }
             if (number == 1)
