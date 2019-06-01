@@ -23,7 +23,8 @@ namespace Lab8
         public struct Data
         {
             public Months month;
-            public int averageTemperature;
+            public double averageTemperature;
+            public int[] dayTemperature;
             public override string ToString()
             {
                 return $"Месяц: {month} со средней температурой {averageTemperature}";
@@ -68,8 +69,11 @@ namespace Lab8
         /// </summary>
         public void PrintData()
         {
-            foreach (Data data in GetData)
+            foreach (Data data in GetData) {
                 Console.WriteLine(data);
+                for (int i = 1; i <= data.dayTemperature.Length; i++)
+                    Console.WriteLine($"Температура {i} дня равнялась {data.dayTemperature[i]}");
+            }
         }
         #endregion
         #region Контроллер
@@ -97,6 +101,18 @@ namespace Lab8
         public void Change(int index, Data data)
         {
             GetData[index] = data;
+        }
+        /// <summary>
+        /// Вычисляет среднюю температуру месяца
+        /// </summary>
+        /// <returns>Средняя температура месяца</returns>
+        /// <param name="data">Информация о месяце</param>
+        public static double CalculateAverageTemperature(Data data)
+        {
+            int sum = 0;
+            foreach (int temperature in data.dayTemperature)
+                sum += temperature;
+            return sum / data.dayTemperature.Length;
         }
         #endregion
     }

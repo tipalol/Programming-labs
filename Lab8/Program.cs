@@ -116,7 +116,63 @@ namespace Lab8
 
             return month;
         }
-
+        /// <summary>
+        /// Создает массив данных о днях в месяце
+        /// с помощью генератора случайных чисел
+        /// </summary>
+        /// <returns>Массив данных о днях</returns>
+        /// <param name="month">Месяц</param>
+        static int[] CreateDaysInfo(Months month)
+        {
+            int daysCount = 31;
+            int[] result;
+            var random = new Random();
+            switch (month)
+            {
+                case Months.January:
+                    daysCount = 31;
+                    break;
+                case Months.February:
+                    daysCount = 28;
+                    break;
+                case Months.March:
+                    daysCount = 31;
+                    break;
+                case Months.April:
+                    daysCount = 30;
+                    break;
+                case Months.May:
+                    daysCount = 31;
+                    break;
+                case Months.June:
+                    daysCount = 30;
+                    break;
+                case Months.July:
+                    daysCount = 31;
+                    break;
+                case Months.August:
+                    daysCount = 31;
+                    break;
+                case Months.September:
+                    daysCount = 30;
+                    break;
+                case Months.October:
+                    daysCount = 31;
+                    break;
+                case Months.November:
+                    daysCount = 30;
+                    break;
+                case Months.December:
+                    daysCount = 31;
+                    break;
+            }
+            result = new int[daysCount];
+            for (int i = 0; i < daysCount; i++)
+            {
+                result[i] = random.Next(-10, 20);
+            }
+            return result;
+        }
         #endregion
         public static void Main(string[] args)
         {
@@ -133,9 +189,10 @@ namespace Lab8
                         Console.ReadKey();
                         break;
                     case 3:
-                        MeteoWorker.Data addingData;
+                        MeteoWorker.Data addingData = new MeteoWorker.Data();
                         addingData.month = ChooseMonth();
-                        addingData.averageTemperature = GetInt("среднее значение температуры в данном месяце");
+                        addingData.dayTemperature = CreateDaysInfo(addingData.month);
+                        addingData.averageTemperature = MeteoWorker.CalculateAverageTemperature(addingData);
                         meteoWorker.Add(addingData);
                         Console.WriteLine("Данные успешно добавлены");
                         Console.ReadKey();
@@ -149,9 +206,10 @@ namespace Lab8
                     case 5:
                         int changingIndex = GetInt("номер корректируемого элемента");
                         Console.WriteLine("Сейчас введите данные скорректированного элемента..");
-                        MeteoWorker.Data changingData;
+                        MeteoWorker.Data changingData = new MeteoWorker.Data();
                         changingData.month = ChooseMonth();
-                        changingData.averageTemperature = GetInt("среднее значение температуры в данном месяце");
+                        changingData.dayTemperature = CreateDaysInfo(changingData.month);
+                        changingData.averageTemperature = MeteoWorker.CalculateAverageTemperature(changingData);
                         meteoWorker.Change(changingIndex, changingData);
                         Console.WriteLine("Данные успешно скорректированы");
                         Console.ReadKey();
