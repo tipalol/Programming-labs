@@ -42,7 +42,7 @@ namespace Lab9
                 else if (value > 59)
                     throw new Exception("значение секунд не может превышать 59.");
                 else
-                    minutes = value;
+                    seconds = value;
             }
         }
         /// <summary>
@@ -79,6 +79,8 @@ namespace Lab9
                     throw new Exception("невозможно присвоить кол-ву часов отрицательное значение.");
                 else if (value > 23)
                     throw new Exception("значение часов не может превышать 23.");
+                else
+                    hours = value;
             }
           }
         /// <summary>
@@ -104,6 +106,27 @@ namespace Lab9
             Seconds = dateTime.Second;
             count++;
         }
+        public static Time operator ++(Time time)
+        {
+            time.AddMinutes(1);
+            return time;
+        }
+        public static Time operator --(Time time)
+        {
+            time.AddMinutes(-1);
+            return time;
+        }
+        public static explicit operator int(Time time)
+        {
+            return time.Minutes;
+        }
+        public static implicit operator bool(Time time)
+        {
+            if (time.Minutes != 0 && time.Seconds != 0)
+                return true;
+            else
+                return false;
+        }
         #endregion
         #region Представление
         /// <summary>
@@ -120,7 +143,7 @@ namespace Lab9
         /// Добавляет секунды к текущему времени
         /// </summary>
         /// <param name="countOfSeconds">Кол-во секунд</param>
-        public void AddSeconds(int countOfSeconds)
+        public Time AddSeconds(int countOfSeconds)
         {
             //Если укладываемся в возможное кол-во секунд
             if (Seconds + countOfSeconds < 60 && Seconds + countOfSeconds > -1)
@@ -154,12 +177,13 @@ namespace Lab9
                     Seconds += (countOfSeconds % 60) - 60;
                 }
             }
+            return this;
         }
         /// <summary>
         /// Добавляет минуты к текущему времени
         /// </summary>
         /// <param name="countOfMinutes">Кол-во минут</param>
-        public void AddMinutes(int countOfMinutes)
+        public Time AddMinutes(int countOfMinutes)
         {
             //Если укладываемся в возможное кол-во минут
             if (Minutes + countOfMinutes < 60 && Minutes + countOfMinutes > -1)
@@ -193,12 +217,13 @@ namespace Lab9
                     Minutes += (countOfMinutes % 60) - 60;
                 }
             }
+            return this;
         }
         /// <summary>
         /// Добавляет часы к текущему времени
         /// </summary>
         /// <param name="countOfHours">Кол-во часов</param>
-        public void AddHours(int countOfHours)
+        public Time AddHours(int countOfHours)
         {
             //Если укладываемся в возможное кол-во часов
             if (Hours + countOfHours < 24 && Hours + countOfHours > -1)
@@ -217,6 +242,7 @@ namespace Lab9
                 else
                     Hours += estimatedHours - 24;
             }
+            return this;
         }
         #endregion
     }
