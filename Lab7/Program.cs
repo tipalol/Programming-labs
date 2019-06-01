@@ -88,6 +88,22 @@ namespace Lab7
 
             return begin;
         }
+        static int CountOfThis(Tree t, char someChar)
+        {
+            int result = 0;
+
+            if (t == null)
+            {
+                Console.WriteLine("Дерево пустое");
+            } else
+            {
+                result += CountOfThis(t.Left, someChar);
+                if (t.Data == someChar) result++;
+                result += CountOfThis(t.Right, someChar);
+            }
+
+            return result;
+        }
         #endregion
         public static void Main(string[] args)
         {
@@ -116,7 +132,21 @@ namespace Lab7
                         DoublePoint.ShowList(doublePoint);
                         break;
                     case 5:
+                        int treeSize = GetInt("размер создаваемого дерева");
 
+                        tree = Tree.IdealTree(treeSize, tree);
+
+                        Tree.ShowTree(tree, treeSize);
+                        
+                        break;
+                    case 6:
+                        int countOfThis;
+                        Console.WriteLine("Введите искомый символ");
+                        char someChar = Console.ReadLine()[0];
+
+                        countOfThis = CountOfThis(tree, someChar);
+
+                        Console.WriteLine($"Кол-во элементов {someChar}: {countOfThis}");
                         break;
                 }
                 input = Menu();

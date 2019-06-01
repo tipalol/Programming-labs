@@ -23,6 +23,10 @@ namespace Lab7
         /// <value>Правая ветка дерева</value>
         public Tree Right { get; set; }
         /// <summary>
+        /// Генератор случайных чисел
+        /// </summary>
+        static Random random = new Random();
+        /// <summary>
         /// Создает новую сущность <see cref="T:Lab7.Tree"/>.
         /// </summary>
         /// <param name="data">Информаицонное поле</param>
@@ -49,16 +53,14 @@ namespace Lab7
         /// </summary>
         /// <param name="tree">Дерево</param>
         /// <param name="length">Длина</param>
-        static void ShowTree(Tree tree, int length)
+        public static void ShowTree(Tree p, int l)
         {
-            if (tree != null)
+            if (p != null)
             {
-                ShowTree(tree.Left, length + 3);
-
-                for (int i = 0; i < length; i++)
-                    Console.Write(" ");
-                Console.WriteLine(tree.Data);
-                ShowTree(tree.Right, length + 3);
+                ShowTree(p.Left, l + 3);//переход к левому поддереву
+                for (int i = 0; i < l; i++) Console.Write(" ");
+                Console.WriteLine(p.Data);
+                ShowTree(p.Right, l + 3);//переход к правому поддереву
             }
         }
         #endregion
@@ -72,6 +74,46 @@ namespace Lab7
         {
             Tree tree = new Tree(d);
             return tree;
+        }
+        /// <summary>
+        /// Возвращает случайное значение информационного поля
+        /// </summary>
+        /// <returns>Значение информационного поля</returns>
+        static char GetInfo()
+        {
+            int info_ = random.Next(0, 6);
+            char info;
+
+            switch (info_)
+            {
+                case 0:
+                    info = 'a';
+                    break;
+                case 1:
+                    info = 'b';
+                    break;
+                case 2:
+                    info = 'c';
+                    break;
+                case 3:
+                    info = 'd';
+                    break;
+                case 4:
+                    info = 'e';
+                    break;
+                case 5:
+                    info = 'f';
+                    break;
+                case 6:
+                    info = 'g';
+                    break;
+                default:
+                    info = 'h';
+                    break;
+            }
+
+            Console.WriteLine($"Элемент {info} добавлен");
+            return info;
         }
         /// <summary>
         /// Добавляет узел с указанным информационным полем в указанное дерево
@@ -107,9 +149,19 @@ namespace Lab7
         /// <returns>Корень полученного дерева</returns>
         /// <param name="size">Размер</param>
         /// <param name="t">Дерево</param>
-        public static Tree IdealTree(int size, Tree t)
+        public static Tree IdealTree(int size, Tree p)
         {
-
+            Tree r;
+            int nl, nr;
+            if (size == 0) { p = null; return p; }
+            nl = size / 2;
+            nr = size - nl - 1;
+            char d = GetInfo();
+            r = new Tree(d);
+            r.Left = IdealTree(nl, r.Left);
+            r.Right = IdealTree(nr, r.Right);
+            p = r;
+            return p;
         }
         #endregion
     }

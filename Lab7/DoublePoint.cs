@@ -83,7 +83,7 @@ namespace Lab7
         /// </summary>
         /// <returns>Созданный элемент</returns>
         /// <param name="info">Информационное поле</param>
-        public static DoublePoint MakePoint(int info = 0)
+        public static DoublePoint MakePoint(string info = "")
         {
             DoublePoint p = new DoublePoint(info);
             return p;
@@ -96,14 +96,14 @@ namespace Lab7
         public static DoublePoint MakeList(int size)
         {
             var random = new Random();
-            var info = random.Next(0, 9);
+            string info = random.Next(0, 9).ToString();
             DoublePoint begin = MakePoint(info);
 
             begin.PrintInfo();
 
             for (int i = 1; i < size; i++)
             {
-                info = random.Next(0, 9);
+                info = random.Next(0, 9).ToString();
                 DoublePoint p = MakePoint(info);
                 p.PrintInfo();
                 p.Next = begin;
@@ -121,7 +121,7 @@ namespace Lab7
         public static DoublePoint MakeListToEnd(int ofSize)
         {
             var random = new Random();
-            var info = random.Next(1, 9);
+            var info = random.Next(1, 9).ToString();
 
             //Создаем первый элемент списка
             DoublePoint end = MakePoint(info);
@@ -132,7 +132,7 @@ namespace Lab7
 
             for (int i = 1; i < ofSize; i++)
             {
-                info = random.Next(0, 9);
+                info = random.Next(0, 9).ToString();
                 DoublePoint p = MakePoint(info);
                 p.PrintInfo();
                 r.Next = p;
@@ -150,14 +150,14 @@ namespace Lab7
         public static DoublePoint AddPoint(DoublePoint begin, int number)
         {
             var random = new Random();
-            var info = random.Next(0, 9);
+            var info = random.Next(0, 9).ToString();
             DoublePoint newPoint = MakePoint(info);
 
             newPoint.PrintInfo();
             //Если список оказывается пустым
             if (begin == null)
             {
-                begin = MakePoint(random.Next(0, 9));
+                begin = MakePoint(random.Next(0, 9).ToString());
                 return begin;
             }
             if (number == 1)
