@@ -5,6 +5,16 @@ namespace Lab8
 {
     class MainClass
     {
+        #region Модель
+        /// <summary>
+        /// Реализует работу с данными
+        /// </summary>
+        static MeteoWorker meteoWorker;
+        /// <summary>
+        /// реализует работу с файлами
+        /// </summary>
+        static DatabaseWorker databaseWorker;
+        #endregion
         #region Представление
         /// <summary>
         /// Получает целое число из введенной пользователем строки.
@@ -50,8 +60,106 @@ namespace Lab8
             return result;
         }
         #endregion
+        #region Контроллер
+        /// <summary>
+        /// Позволяет пользователю выбрать месяц
+        /// </summary>
+        /// <returns>Выбранный месяц</returns>
+        static Months ChooseMonth()
+        {
+            Months month;
+            int monthNumber = GetInt("необходимый месяц (от 1 до 12)");
+
+            switch (monthNumber)
+            {
+                case 1:
+                    month = Months.January;
+                    break;
+                case 2:
+                    month = Months.February;
+                    break;
+                case 3:
+                    month = Months.March;
+                    break;
+                case 4:
+                    month = Months.April;
+                    break;
+                case 5:
+                    month = Months.May;
+                    break;
+                case 6:
+                    month = Months.June;
+                    break;
+                case 7:
+                    month = Months.July;
+                    break;
+                case 8:
+                    month = Months.August;
+                    break;
+                case 9:
+                    month = Months.September;
+                    break;
+                case 10:
+                    month = Months.October;
+                    break;
+                case 11:
+                    month = Months.November;
+                    break;
+                case 12:
+                    month = Months.December;
+                    break;
+                default:
+                    Console.WriteLine("Выбранного месяца не существует. Выбран декабрь");
+                    month = Months.December;
+                    break;
+            }
+
+            return month;
+        }
+
+        #endregion
         public static void Main(string[] args)
         {
+            int input = Menu();
+            while (input != 0)
+            {
+                switch (input)
+                {
+                    case 1:
+
+                        break;
+                    case 2:
+                        meteoWorker.PrintData();
+                        Console.ReadKey();
+                        break;
+                    case 3:
+                        MeteoWorker.Data addingData;
+                        addingData.month = ChooseMonth();
+                        addingData.averageTemperature = GetInt("среднее значение температуры в данном месяце");
+                        meteoWorker.Add(addingData);
+                        Console.WriteLine("Данные успешно добавлены");
+                        Console.ReadKey();
+                        break;
+                    case 4:
+                        int removingIndex = GetInt("индекс удаляемого элемента");
+                        meteoWorker.RemoveAt(removingIndex);
+                        Console.WriteLine("Элемент успешно удален");
+                        Console.ReadKey();
+                        break;
+                    case 5:
+                        int changingIndex = GetInt("номер корректируемого элемента");
+                        Console.WriteLine("Сейчас введите данные скорректированного элемента..");
+                        MeteoWorker.Data changingData;
+                        changingData.month = ChooseMonth();
+                        changingData.averageTemperature = GetInt("среднее значение температуры в данном месяце");
+                        meteoWorker.Change(changingIndex, changingData);
+                        Console.WriteLine("Данные успешно скорректированы");
+                        Console.ReadKey();
+                        break;
+                }
+                input = Menu();
+                Console.Clear();
+            }
 
         }
     }

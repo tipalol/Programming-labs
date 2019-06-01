@@ -22,8 +22,8 @@ namespace Lab8
         [Serializable]
         public struct Data
         {
-            Months month;
-            int averageTemperature;
+            public Months month;
+            public int averageTemperature;
             public override string ToString()
             {
                 return $"Месяц: {month} со средней температурой {averageTemperature}";
@@ -63,9 +63,41 @@ namespace Lab8
 
             return result;
         }
+        /// <summary>
+        /// Выводит на экран всю информацию
+        /// </summary>
+        public void PrintData()
+        {
+            foreach (Data data in GetData)
+                Console.WriteLine(data);
+        }
         #endregion
         #region Контроллер
-
+        /// <summary>
+        /// Добавляет указанный элемент в список данных
+        /// </summary>
+        /// <param name="data">Дата</param>
+        public void Add(Data data)
+        {
+            GetData.Add(data);
+        }
+        /// <summary>
+        /// Удаляет элемент с указанным индексом
+        /// </summary>
+        /// <param name="index">Индекс</param>
+        public void RemoveAt(int index)
+        {
+            GetData.RemoveAt(index);
+        }
+        /// <summary>
+        /// Меняет информацию, содержащуюся в указанной позиции
+        /// </summary>
+        /// <param name="index">Индекс</param>
+        /// <param name="data">Дата</param>
+        public void Change(int index, Data data)
+        {
+            GetData[index] = data;
+        }
         #endregion
     }
 }
