@@ -11,7 +11,7 @@ namespace Lab10
     /// <summary>
     /// Класс определяет студента
     /// </summary>
-    public class Student : Person
+    public class Student : Person, ICloneable
     {
         /// <summary>
         /// Получает курс студента
@@ -33,6 +33,10 @@ namespace Lab10
         public Student(string name, int gender, int course) : base (name, gender)
         {
             Course = course;
+        }
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

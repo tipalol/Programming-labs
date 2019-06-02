@@ -11,7 +11,7 @@ namespace Lab10
     /// <summary>
     /// Класс определяет абстрактную персону
     /// </summary>
-    public abstract class Person 
+    public abstract class Person : ICloneable
     {
         /// <summary>
         /// Получает имя объекта
@@ -51,6 +51,10 @@ namespace Lab10
         {
             Name = name;
             Gender = gender;
+        }
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

@@ -42,6 +42,7 @@ namespace Lab10
         {
             int result;
 
+            Console.Clear();
             Console.WriteLine("Терминал университета");
             Console.WriteLine("1 - Вывести список работников университета");
             Console.WriteLine("2 - Добавить работника");

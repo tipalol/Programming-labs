@@ -11,7 +11,7 @@ namespace Lab10
     /// <summary>
     /// Класс определяет уборщика
     /// </summary>
-    public class Cleaner : Person, IWorker
+    public class Cleaner : Person, IWorker, ICloneable
     {
         /// <summary>
         /// Получает или устанавливает должность
@@ -29,6 +29,10 @@ namespace Lab10
         public Cleaner(string name, int gender, string job) : base (name, gender)
         {
             Job = job;
+        }
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

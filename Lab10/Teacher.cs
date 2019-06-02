@@ -13,7 +13,7 @@ namespace Lab10
     /// <summary>
     /// Класс определяет учителя
     /// </summary>
-    public class Teacher : Person, IWorker, IComparable
+    public class Teacher : Person, IWorker, IComparable, ICloneable
     {
         /// <summary>
         /// Получает факультет
@@ -50,6 +50,10 @@ namespace Lab10
             if (String.Compare(this.Name, temp.Name) > 0) return 1;
             if (String.Compare(this.Name, temp.Name) < 0) return -1;
             return 0;
+        }
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 
