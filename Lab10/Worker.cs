@@ -1,18 +1,22 @@
-﻿using System;
+﻿//
+//  Worker.cs
+//  Worker
+//
+//  Created by Сорокин Дмитрий on 02/06/2019.
+//  Copyright © 2019 Сорокин Дмитрий. All rights reserved.
+//
+using System;
 namespace Lab10
 {
     /// <summary>
-    /// Класс определяет стандартного работника
+    /// Интерфейс реализует стандартного работника
     /// </summary>
-    public abstract class Worker : Person
+    public interface IWorker
     {
         /// <summary>
-        /// Создает новый объект класса <see cref="T:Lab10.Worker"/>
+        /// Получает должность
         /// </summary>
-        /// <param name="name">Имя объекта</param>
-        /// <param name="gender">Пол объекта</param>
-        protected Worker(string name, int gender) : base (name, gender)
-        {
-        }
+        /// <value>Должность</value>
+        string Job { get; set; }
     }
 }

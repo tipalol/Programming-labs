@@ -1,4 +1,11 @@
-﻿using System;
+﻿//
+//  Person.cs
+//  Person
+//
+//  Created by Сорокин Дмитрий on 02/06/2019.
+//  Copyright © 2019 Сорокин Дмитрий. All rights reserved.
+//
+using System;
 namespace Lab10
 {
     /// <summary>
@@ -7,12 +14,12 @@ namespace Lab10
     public abstract class Person
     {
         /// <summary>
-        /// Получает или изменяет имя объекта
+        /// Получает имя объекта
         /// </summary>
         /// <value>Имя объекта</value>
         public string Name { get; private set; }
         /// <summary>
-        /// Получает или устанавливает пол человека
+        /// Получает пол человека
         /// </summary>
         /// <value>Пол человека</value>
         public int Gender { get; private set; }
