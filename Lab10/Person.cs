@@ -11,7 +11,7 @@ namespace Lab10
     /// <summary>
     /// Класс определяет абстрактную персону
     /// </summary>
-    public abstract class Person
+    public abstract class Person 
     {
         /// <summary>
         /// Получает имя объекта
@@ -23,6 +23,25 @@ namespace Lab10
         /// </summary>
         /// <value>Пол человека</value>
         public int Gender { get; private set; }
+        /// <summary>
+        /// Рассказывает о себе
+        /// </summary>
+        virtual public string TellAbout() {
+            string speaking = $"Меня зовут {Name}, ";
+            string gender = "";
+            switch (Gender)
+            {
+                case 1:
+                    gender = "Я мужчина";
+                    break;
+                case 2:
+                    gender = "Я женщина";
+                    break;
+            }
+            speaking = $@"Меня зовут {Name}
+            {gender}";
+            return speaking;
+        }
         /// <summary>
         /// Создает новый объект класса <see cref="T:Lab10.Person"/>
         /// </summary>

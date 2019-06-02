@@ -19,6 +19,13 @@ namespace Lab10
         /// <value>Курс студента</value>
         public int Course { get; private set; }
         /// <summary>
+        /// Рассказывает о себе
+        /// </summary>
+        public override string TellAbout()
+        {
+            return base.TellAbout() + $", и я учусь на {Course} курсе";
+        }
+        /// <summary>
         /// Создает новый объект класса <see cref="T:Lab10.Student"/>
         /// </summary>
         /// <param name="name">Имя объекта</param>

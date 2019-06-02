@@ -18,5 +18,6 @@ namespace Lab10
         /// </summary>
         /// <value>Должность</value>
         string Job { get; set; }
+
     }
 }

@@ -6,12 +6,14 @@
 //  Copyright © 2019 Сорокин Дмитрий. All rights reserved.
 //
 using System;
+using System.Collections;
+
 namespace Lab10
 {
     /// <summary>
     /// Класс определяет учителя
     /// </summary>
-    public class Teacher : Person, IWorker
+    public class Teacher : Person, IWorker, IComparable
     {
         /// <summary>
         /// Получает факультет
@@ -24,6 +26,15 @@ namespace Lab10
         /// <value>Должность</value>
         public string Job { get; set; }
         /// <summary>
+        /// Рассказывает о себе
+        /// </summary>
+        public override string TellAbout()
+        {
+            return base.TellAbout() + $@",
+            и я работаю преподавателем на должности {Job},
+            а мой факультет - {Faculty}";
+        }
+        /// <summary>
         /// Создает новый объект класса <see cref="T:Lab10.Teacher"/>
         /// </summary>
         /// <param name="name">Имя объекта</param>
@@ -33,5 +44,13 @@ namespace Lab10
             Job = job;
             Faculty = faculty;
         }
+        public int CompareTo(object obj)
+        {
+            Teacher temp = (Teacher)obj;
+            if (String.Compare(this.Name, temp.Name) > 0) return 1;
+            if (String.Compare(this.Name, temp.Name) < 0) return -1;
+            return 0;
+        }
     }
+
 }
