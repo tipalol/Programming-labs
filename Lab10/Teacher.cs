@@ -28,8 +28,9 @@ namespace Lab10
         /// </summary>
         /// <param name="name">Имя объекта</param>
         /// <param name="gender">Пол объекта</param>
-        public Teacher(string name, int gender, string job, string faculty) : base (name, gender, job)
+        public Teacher(string name, int gender, string job, string faculty) : base (name, gender)
         {
+            Job = job;
             Faculty = faculty;
         }
     }

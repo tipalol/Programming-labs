@@ -38,6 +38,7 @@
     <Compile Include="Worker.cs" />
     <Compile Include="Teacher.cs" />
     <Compile Include="Student.cs" />
+    <Compile Include="Cleaner.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
