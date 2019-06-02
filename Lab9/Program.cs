@@ -48,6 +48,7 @@ namespace Lab9
             Console.WriteLine("6 - Сложить времена");
             Console.WriteLine("7 - Отнять времена");
             Console.WriteLine("8 - Найти среднее арифмитическое");
+            Console.WriteLine("9 - Создать массив времен");
             Console.WriteLine("0 - Выход");
 
             Console.WriteLine();
@@ -58,7 +59,7 @@ namespace Lab9
 
             result = GetInt("необходимый пункт меню");
 
-            while (result < 0 || result > 8)
+            while (result < 0 || result > 9)
             {
                 Console.WriteLine("Выбранного пункта меню не существует, повторите ввод");
                 result = GetInt();
@@ -176,6 +177,20 @@ namespace Lab9
                         break;
                     case 8:
                         Console.WriteLine($"Среднее арифмитическое минут: {CalculateAverage(timeArray)}");
+                        Console.ReadKey();
+                        break;
+                    case 9:
+                        int mode = GetInt("способ создания (0 - генератор случайных чисел, 1 - с клавиатуры");
+                        int size = GetInt("размер создаваемого массива");
+                        try
+                        {
+                            timeArray = new TimeArray(mode, size);
+                            Console.WriteLine("Массив успешно создан");
+                        } catch (Exception exception)
+                        {
+                            Console.WriteLine($"Произошла ошибка: {exception.Message}");
+                        }
+                        Console.ReadKey();
                         break;
                 }
                 input = Menu();

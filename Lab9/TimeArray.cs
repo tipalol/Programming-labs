@@ -14,6 +14,7 @@ namespace Lab9
     public class TimeArray
     {
         #region Модель
+        const int default_size = 5;
         /// <summary>
         /// Массив времен
         /// </summary>
@@ -33,6 +34,34 @@ namespace Lab9
             Times = times;
             Size = times.Length;
         }
+        public TimeArray(int mode = 0, int size = default_size)
+        {
+            Times = new Time[size];
+            Size = size;
+            switch (mode)
+            {
+                case 0:
+                    var random = new Random();
+                    for (int i = 0; i < size; i++)
+                    {
+                        Times[i].AddSeconds( random.Next(0, 300) );
+                        Times[i].AddMinutes(random.Next(0, 540));
+                        Times[i].AddHours(random.Next(0, 16));
+                    }
+                    break;
+                case 1:
+                    for (int i = 0; i < size; i++)
+                    {
+                        Times[i].AddSeconds( MainClass.GetInt("Введите добавляемое кол-во секунд") );
+                        Times[i].AddMinutes(MainClass.GetInt("Введите добавляемое кол-во минут"));
+                        Times[i].AddHours(MainClass.GetInt("Введите добавляемое кол-во часов"));
+                    }
+                    break;
+                default:
+                    throw new Exception("незвестный режим создания массива");
+            }
+        }
+
         public Time this[int index]
         {
             get
