@@ -22,6 +22,13 @@ namespace Lab11
                 return workers.Count;
             }
         }
+        public void Print()
+        {
+            foreach (Person person in workers)
+            {
+                Console.WriteLine(person.TellAbout());
+            }
+        }
         public bool IsSynchronized { 
             get
             {
@@ -46,7 +53,7 @@ namespace Lab11
         }
         public object Clone()
         {
-            return workers.Clone();
+            return this.MemberwiseClone();
         }
         public bool Contains(object v)
         {
