@@ -7,16 +7,20 @@ namespace Lab13
         public event CollectionHandler CollectionCountChanged;
         public event CollectionHandler CollectionReferenceChanged;
         public string Name { get; set; }
+        static int count = 0;
         public bool Remove(int j)
         {
             try
             {
-                CollectionCountChanged(this, new CollectionHandlerEventArgs(Name, "Удаление элемента", People[j]));
-                People.RemoveAt(j);
+                count--;
+                if (Name != "Вторая")
+                    CollectionCountChanged(this, new CollectionHandlerEventArgs(Name, "Удаление элемента", People[j]));
+                    People.RemoveAt(j);
+
                 return true;
             } catch (IndexErrorException e)
             {
-                Console.WriteLine(e);
+
                 return false;
             }
         }
@@ -34,9 +38,11 @@ namespace Lab13
         }
         public new void FillRandom(int index)
         {
+            count = index;
             try
             {
-                CollectionCountChanged(this, new CollectionHandlerEventArgs(Name, "Заполнение случайными элементами", this));
+                if (Name != "Вторая")
+                    CollectionCountChanged(this, new CollectionHandlerEventArgs(Name, "Заполнение случайными элементами", this));
                 base.FillRandom(index);
             } catch (Exception e)
             {
@@ -45,7 +51,9 @@ namespace Lab13
         }
         public new void Add(Person person)
         {
-            CollectionCountChanged(this, new CollectionHandlerEventArgs(Name, "Добавление нового элемента", person));
+            count++;
+            if (Name != "Вторая")
+                CollectionCountChanged(this, new CollectionHandlerEventArgs(Name, "Добавление нового элемента", person));
             base.Add(person);
         }
         public NewUnivercityWorkers(string name)

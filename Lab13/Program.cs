@@ -44,6 +44,7 @@ namespace Lab13
             eventCollection.CollectionCountChanged += firstJournal.CollectionCountChanged;
             eventCollection.CollectionReferenceChanged += firstJournal.CollectionReferenceChanged;
             eventCollection2.CollectionReferenceChanged += secondJournal.CollectionReferenceChanged;
+
             while (input != 0)
             {
                 switch (input)
@@ -83,7 +84,7 @@ namespace Lab13
                         break;
                     case 4:
                         people.Print();
-                        int removingIndex = menu.GetInt("номер удаляемого элемента");
+                        int removingIndex = menu.GetInt("номер удаляемого элемента")-1;
                         try
                         {
                             people.RemoveAt(removingIndex);
@@ -118,6 +119,9 @@ namespace Lab13
                         int size = menu.GetInt("размер коллекции");
                         eventCollection = new NewUnivercityWorkers("Первая");
                         eventCollection2 = new NewUnivercityWorkers("Вторая");
+                        eventCollection.CollectionCountChanged += firstJournal.CollectionCountChanged;
+                        eventCollection.CollectionReferenceChanged += firstJournal.CollectionReferenceChanged;
+                        eventCollection2.CollectionReferenceChanged += secondJournal.CollectionReferenceChanged;
                         eventCollection.FillRandom(size);
                         eventCollection2.FillRandom(size);
                         eventCollection.Print();
@@ -127,19 +131,22 @@ namespace Lab13
                         Person person = FormPerson();
                         eventCollection.Add(person);
                         eventCollection2.Add(person);
+                        eventCollection.Print();
                         break;
                     case 10:
                         eventCollection.Print();
-                        int removingIndexEvent = menu.GetInt("номер удаляемого элемента");
+                        int removingIndexEvent = menu.GetInt("номер удаляемого элемента")-1;
                         eventCollection.Remove(removingIndexEvent);
                         eventCollection2.Remove(removingIndexEvent);
+                        eventCollection.Print();
                         break;
                     case 11:
                         eventCollection.Print();
-                        int changingIndex = menu.GetInt("номер изменяемого элемента");
+                        int changingIndex = menu.GetInt("номер изменяемого элемента")-1;
                         Person changingPerson = FormPerson();
                         eventCollection[changingIndex] = changingPerson;
                         eventCollection2[changingIndex] = changingPerson;
+                        eventCollection.Print();
                         break;
                     case 12:
                         firstJournal.Print();

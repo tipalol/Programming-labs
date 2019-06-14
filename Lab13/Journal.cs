@@ -10,7 +10,7 @@ namespace Lab13
         /// <summary>
         /// Список произошедших событий
         /// </summary>
-        private readonly List<JournalEntry> journalEntries;
+        private List<JournalEntry> journalEntries = new List<JournalEntry>();
         public void CollectionCountChanged(object sourse, CollectionHandlerEventArgs args)
         {
             JournalEntry entry = new JournalEntry(args.Name, args.ChangeType, args.Sourse.ToString());
