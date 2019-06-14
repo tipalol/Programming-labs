@@ -1,0 +1,5 @@
+/Users/sorokindmitrij/Projects/YesICan/Lab13/bin/Debug/Lab13.exe
+/Users/sorokindmitrij/Projects/YesICan/Lab13/bin/Debug/Lab13.pdb
+/Users/sorokindmitrij/Projects/YesICan/Lab13/obj/x86/Debug/Lab13.csproj.CoreCompileInputs.cache
+/Users/sorokindmitrij/Projects/YesICan/Lab13/obj/x86/Debug/Lab13.exe
+/Users/sorokindmitrij/Projects/YesICan/Lab13/obj/x86/Debug/Lab13.pdb
