@@ -1,5 +1,0 @@
-/Users/sorokindmitrij/Projects/YesICan/YesICan/obj/x86/Debug/Lab3.csproj.CoreCompileInputs.cache
-/Users/sorokindmitrij/Projects/YesICan/YesICan/bin/Debug/YesICan.exe
-/Users/sorokindmitrij/Projects/YesICan/YesICan/bin/Debug/YesICan.pdb
-/Users/sorokindmitrij/Projects/YesICan/YesICan/obj/x86/Debug/YesICan.exe
-/Users/sorokindmitrij/Projects/YesICan/YesICan/obj/x86/Debug/YesICan.pdb
