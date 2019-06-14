@@ -36,8 +36,11 @@ namespace Lab9
         }
         public TimeArray(int mode = 0, int size = default_size)
         {
-            Times = new Time[size];
+            Times = new Time[size+1];
+            for (int i = 0; i < size; i++)
+                Times[i] = new Time();
             Size = size;
+
             switch (mode)
             {
                 case 0:

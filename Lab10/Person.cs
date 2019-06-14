@@ -32,10 +32,10 @@ namespace Lab10
             switch (Gender)
             {
                 case 1:
-                    gender = "Я мужчина";
+                    gender = "я мужчина";
                     break;
                 case 2:
-                    gender = "Я женщина";
+                    gender = "я женщина";
                     break;
             }
             speaking = $@"Меня зовут {Name}

@@ -118,7 +118,7 @@ namespace Lab9
         }
         public static explicit operator int(Time time)
         {
-            return time.Minutes;
+            return time.Minutes + time.hours * 60;
         }
         public static implicit operator bool(Time time)
         {

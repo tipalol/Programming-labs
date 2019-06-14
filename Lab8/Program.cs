@@ -288,12 +288,23 @@ namespace Lab8
                         break;
                     case 4:
                         int removingIndex = GetInt("индекс удаляемого элемента");
+                        while (removingIndex > meteoWorker.GetData.Count-1 || removingIndex < 0)
+                        {
+                            Console.WriteLine("Неа");
+                            removingIndex = GetInt("индекс удаляемого элемента");
+                        }
                         meteoWorker.RemoveAt(removingIndex);
                         Console.WriteLine("Элемент успешно удален");
                         Console.ReadKey();
                         break;
                     case 5:
+
                         int changingIndex = GetInt("номер корректируемого элемента");
+                        while (changingIndex > meteoWorker.GetData.Count - 1 || changingIndex < 0)
+                        {
+                            Console.WriteLine("Неа");
+                            changingIndex = GetInt("индекс изменяемого элемента");
+                        }
                         Console.WriteLine("Сейчас введите данные скорректированного элемента..");
                         MeteoWorker.Data changingData = new MeteoWorker.Data();
                         changingData.month = ChooseMonth();

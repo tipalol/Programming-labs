@@ -114,6 +114,11 @@ namespace Lab7
                 {
                     case 1:
                         int size = GetInt("размер создаваемого списка");
+                        while (size < 1)
+                        {
+                            Console.WriteLine("Неа");
+                            size = GetInt("размер создаваемого списка");
+                        }
                         point = Point.MakeList(size);
                         Point.ShowList(point);
                         break;
@@ -123,17 +128,31 @@ namespace Lab7
                         break;
                     case 3:
                         int doubleSize = GetInt("размер создаваемого списка");
+                        while (doubleSize < 1)
+                        {
+                            Console.WriteLine("неа");
+                            doubleSize = GetInt("размер создаваемого списка");
+                        }
                         doublePoint = DoublePoint.MakeList(doubleSize);
                         DoublePoint.ShowList(doublePoint);
                         break;
                     case 4:
                         int position = GetInt("позицию добавляемого элемента");
+                        while (position < 0 )
+                        {
+                            Console.WriteLine("Неа");
+                            position = GetInt("позицию добавляемого элемента");
+                        }
                         doublePoint = DoublePoint.AddPoint(doublePoint, position);
                         DoublePoint.ShowList(doublePoint);
                         break;
                     case 5:
                         int treeSize = GetInt("размер создаваемого дерева");
-
+                        while (treeSize < 1)
+                        {
+                            Console.WriteLine("Неа");
+                            treeSize = GetInt("размер создаваемого дерева");
+                        }
                         tree = Tree.IdealTree(treeSize, tree);
 
                         Tree.ShowTree(tree, treeSize);
