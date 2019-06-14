@@ -10,41 +10,41 @@ namespace Lab13
     /// </summary>
     public class UnivercityWorkers : Collection<Person>
     {
-        private List<Person> people = new List<Person>();
+        public List<Person> People { get; protected set; } = new List<Person>();
         readonly static Random random = new Random();
         public int Length
         {
             get
             {
-                if (people == null) throw new NullReferenceException("Коллекция не инициализирована");
-                return people.Count;
+                if (People == null) throw new NullReferenceException("Коллекция не инициализирована");
+                return People.Count;
             }
         }
         public new void Add(Person person)
         {
-            if (people == null) throw new NullReferenceException("Коллекция не инициализирована");
-            people.Add(person);
+            if (People == null) throw new NullReferenceException("Коллекция не инициализирована");
+            People.Add(person);
         }
         public new void Remove(Person person)
         {
-            if (people == null) throw new NullReferenceException("Коллекция не инициализирована");
-            people.Remove(person);
+            if (People == null) throw new NullReferenceException("Коллекция не инициализирована");
+            People.Remove(person);
         }
         public new void RemoveAt(int index)
         {
-            if (people == null) throw new NullReferenceException("Коллекция не инициализирована");
-            if (index >= people.Count || index < 0) throw new IndexErrorException("Такого элемента не существует");
-            people.RemoveAt(index);
+            if (People == null) throw new NullReferenceException("Коллекция не инициализирована");
+            if (index >= People.Count || index < 0) throw new IndexErrorException("Такого элемента не существует");
+            People.RemoveAt(index);
         }
         public new void Clear()
         {
-            if (people == null) throw new NullReferenceException("Коллекция не инициализирована");
-            people.Clear();
+            if (People == null) throw new NullReferenceException("Коллекция не инициализирована");
+            People.Clear();
         }
         public void Sort(int mode = 1)
         {
-            if (people == null) throw new NullReferenceException("Коллекция не инициализирована");
-            Person[] temp = people.ToArray();
+            if (People == null) throw new NullReferenceException("Коллекция не инициализирована");
+            Person[] temp = People.ToArray();
             switch (mode)
             {
 
@@ -55,11 +55,11 @@ namespace Lab13
                     Array.Sort(temp, new ByGender());
                     break;
             }
-            people = new List<Person>(temp);
+            People = new List<Person>(temp);
         }
         public new IEnumerator GetEnumerator()
         {
-            return people.GetEnumerator();
+            return People.GetEnumerator();
         }
         public class ByName : IComparer
         {
@@ -81,6 +81,7 @@ namespace Lab13
                 else return -1;
             }
         }
+        
         /// <summary>
         /// Заполняет коллекцию случайными элементами
         /// </summary>
@@ -91,16 +92,16 @@ namespace Lab13
                 switch (random.Next(0,2))
                 {
                     case 1:
-                        people.Add(Teacher.GenerateTeacher());
+                        People.Add(Teacher.GenerateTeacher());
                         break;
                     case 0:
-                        people.Add(Student.GenerateStudent());
+                        People.Add(Student.GenerateStudent());
                         break;
                 }
         }
         public void Print()
         {
-            foreach (Person person in people)
+            foreach (Person person in People)
                 Console.WriteLine(person);
         }
 

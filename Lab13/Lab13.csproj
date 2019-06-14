@@ -41,6 +41,9 @@
     <Compile Include="Menu.cs" />
     <Compile Include="IndexErrorException.cs" />
     <Compile Include="NewUnivercityWorkers.cs" />
+    <Compile Include="CollectionHandlerEventArgs.cs" />
+    <Compile Include="Journal.cs" />
+    <Compile Include="JournalEntry.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,13 +11,39 @@ namespace Lab13
             "Удалить рабочего",
             "Выполнить сортировку",
             "Очистить коллекцию",
-            "Secret"
+            "========Событийные коллекции=======",
+            "Инициализировать две событийные коллекции",
+            "Добавить элемент",
+            "Удалить элемент",
+            "Изменить элемент",
+            "Показать журнал первой коллекции",
+            "Показать журнал второй коллекции"
         };
         readonly static Menu menu = new Menu(menuElements);
         static UnivercityWorkers people = new UnivercityWorkers();
+        static NewUnivercityWorkers eventCollection = new NewUnivercityWorkers("Первая коллекция");
+        static NewUnivercityWorkers eventCollection2 = new NewUnivercityWorkers("Вторая коллекция");
+        static Random random = new Random();
+        static Journal firstJournal = new Journal();
+        static Journal secondJournal = new Journal();
+        static Person FormPerson()
+        {
+            switch (random.Next(1,3))
+            {
+                case 1:
+                    return new Student($"Студент №{eventCollection.Count}", random.Next(1,3), random.Next(1,5));
+                case 2:
+                    return new Teacher($"Учитель №{eventCollection.Count}", random.Next(1,3), $"Факультет №{random.Next(1,5)}");
+            }
+            return null;
+        }
         public static void Main(string[] args)
         {
             int input = menu.GetChoose();
+            //Подключаем журналы к событиям
+            eventCollection.CollectionCountChanged += firstJournal.CollectionCountChanged;
+            eventCollection.CollectionReferenceChanged += firstJournal.CollectionReferenceChanged;
+            eventCollection2.CollectionReferenceChanged += secondJournal.CollectionReferenceChanged;
             while (input != 0)
             {
                 switch (input)
@@ -86,7 +112,40 @@ namespace Lab13
                         Console.WriteLine("Коллекция успешно очищена");
                         break;
                     case 7:
-
+                        Console.WriteLine("Да-да, тут есть события :)");
+                        break;
+                    case 8:
+                        int size = menu.GetInt("размер коллекции");
+                        eventCollection = new NewUnivercityWorkers("Первая");
+                        eventCollection2 = new NewUnivercityWorkers("Вторая");
+                        eventCollection.FillRandom(size);
+                        eventCollection2.FillRandom(size);
+                        eventCollection.Print();
+                        Console.WriteLine("Две коллекции абсолютно одинаковы. Первая подписана на события изменения кол-ва элементов и изменения ссылок. Вторая подписана только на изменения ссылок.");
+                        break;
+                    case 9:
+                        Person person = FormPerson();
+                        eventCollection.Add(person);
+                        eventCollection2.Add(person);
+                        break;
+                    case 10:
+                        eventCollection.Print();
+                        int removingIndexEvent = menu.GetInt("номер удаляемого элемента");
+                        eventCollection.Remove(removingIndexEvent);
+                        eventCollection2.Remove(removingIndexEvent);
+                        break;
+                    case 11:
+                        eventCollection.Print();
+                        int changingIndex = menu.GetInt("номер изменяемого элемента");
+                        Person changingPerson = FormPerson();
+                        eventCollection[changingIndex] = changingPerson;
+                        eventCollection2[changingIndex] = changingPerson;
+                        break;
+                    case 12:
+                        firstJournal.Print();
+                        break;
+                    case 13:
+                        secondJournal.Print();
                         break;
                     default:
                         Console.WriteLine("Something goes wrong :(");
